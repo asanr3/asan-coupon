@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: coupon-eureka
+
+# 设置端口号
+server:
+  port: 8000
+
+eureka:
+  instance:
+    #服务注册中心实例的主机名
+    hostname: localhost
+  client:
+    #表示是否从Eureka Server 获取注册信息，默认是true 如果这是一个单节点的 Eureka Server
+    #不需要同步其他节点的数据，设置为false
+    fetch-registry: false
+    #是否将自己注册到Eureka Server ,默认是true 因为本身就是所以不需要
+    register-with-eureka: false
+    #设置 Eureka Server 所在地址，查询服务和注册服务都需要依赖这个地址
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#  server:
+##   关闭注册中心的保护机制，Eureka 会统计15分钟之内心跳失败的比例低于85%将会触发保护机制，不剔除服务提供者，如果关闭服务注册中心将不可用的实例正确剔除
+#    enable-self-preservation: false
+##    默认值0.85  通过修改值也可以避免触发保护机制
+##    renewal-percent-threshold: 0.45
