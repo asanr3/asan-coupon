@@ -3,6 +3,7 @@ package com.asan.coupon.filter;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
 /**
+ * post - 远程服务调用后过滤
  * @author Asan
  */
 public abstract class AbstractPostZuulFilter extends AbstractZuulFilter {

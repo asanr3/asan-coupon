@@ -22,7 +22,8 @@ public class PreRequestFilter extends AbstractPreZuulFilter {
     /**
      * filterOrder() must also be defined for a filter. Filters may have the same  filterOrder if precedence is not
      * important for a filter. filterOrders do not need to be sequential.
-     *
+     * 同种类的过滤器的执行顺序。
+     * 按照返回值的自然升序执行。
      * @return the int order of a filter
      */
     @Override

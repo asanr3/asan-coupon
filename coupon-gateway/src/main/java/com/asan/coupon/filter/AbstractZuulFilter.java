@@ -11,7 +11,7 @@ import com.netflix.zuul.exception.ZuulException;
 public abstract class AbstractZuulFilter extends ZuulFilter {
 
     /**
-     * 用于在过滤器之间传递消息, 数据保存在每个请求的 ThreadLocal 中
+     * /通过zuul，获取请求上下文，用于在过滤器之间传递消息, 数据保存在每个请求的 ThreadLocal 中
      * 扩展了 Map
      */
     RequestContext context;
