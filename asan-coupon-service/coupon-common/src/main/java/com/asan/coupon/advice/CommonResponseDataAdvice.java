@@ -28,14 +28,13 @@ public class CommonResponseDataAdvice implements ResponseBodyAdvice<Object> {
             return false;
         }
         // 如果当前方法标识了 @IgnoreResponseAdvice 注解, 不需要处理
-        // if (methodParameter.getMethod().isAnnotationPresent(IgnoreResponseAdvice.class)) {
-        //     return false;
-        // }
-        //
-        // // 对响应进行处理, 执行 beforeBodyWrite 方法
-        // return true;
+        if (methodParameter.getMethod().isAnnotationPresent(IgnoreResponseAdvice.class)) {
+            return false;
+        }
 
-       return !methodParameter.getMethod().isAnnotationPresent(IgnoreResponseAdvice.class);
+        // 对响应进行处理, 执行 beforeBodyWrite 方法
+        return true;
+
     }
 
     /** 响应之前返回的处理 */
