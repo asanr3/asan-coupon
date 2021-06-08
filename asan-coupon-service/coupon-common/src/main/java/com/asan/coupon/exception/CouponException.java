@@ -2,7 +2,7 @@ package com.asan.coupon.exception;
 
 /**
  * @author Asan
- * @date 2020/1/9 15:36
+ * @date 2021/6/8
  * 优惠券项目通用异常项目
  */
 
