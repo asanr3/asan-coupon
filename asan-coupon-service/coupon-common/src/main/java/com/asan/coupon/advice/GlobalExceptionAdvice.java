@@ -1,7 +1,7 @@
 package com.asan.coupon.advice;
 
-import com.asan.coupon.exception.CouponException;
 import com.asan.coupon.vo.CommonResponse;
+import com.asan.coupon.exception.CouponException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
