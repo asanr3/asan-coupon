@@ -3,6 +3,10 @@ package com.asan.coupon.entity;
 import com.asan.coupon.constant.CouponCategory;
 import com.asan.coupon.constant.DistributeTarget;
 import com.asan.coupon.constant.ProductLine;
+import com.asan.coupon.converter.CouponCategoryConverter;
+import com.asan.coupon.converter.DistributeTargetConverter;
+import com.asan.coupon.converter.ProductLineConverter;
+import com.asan.coupon.converter.RuleConverter;
 import com.asan.coupon.vo.TemplateRule;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -12,8 +16,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.Convert;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,13 +68,13 @@ public class CouponTemplate implements Serializable {
     /** 优惠券分类 */
     @TableField("category")
     @NonNull
-    // @Convert(converter = CouponCategoryConverter.class)
+    @Convert(converter = CouponCategoryConverter.class)
     private CouponCategory category;
 
     /** 产品线 */
     @TableField("product_line")
     @NonNull
-    // @Convert(converter = ProductLineConverter.class)
+    @Convert(converter = ProductLineConverter.class)
     private ProductLine productLine;
 
     /** 总数 */
@@ -96,13 +100,13 @@ public class CouponTemplate implements Serializable {
     /** 目标用户 */
     @TableField("target")
     @NonNull
-    // @Convert(converter = DistributeTargetConverter.class)
+    @Convert(converter = DistributeTargetConverter.class)
     private DistributeTarget target;
 
     /** 优惠券规则 */
     @TableField("rule")
     @NonNull
-    // @Convert(converter = RuleConverter.class)
+    @Convert(converter = RuleConverter.class)
     private TemplateRule rule;
 
     /**
