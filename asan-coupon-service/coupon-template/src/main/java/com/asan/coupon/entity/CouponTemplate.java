@@ -7,24 +7,23 @@ import com.asan.coupon.converter.CouponCategoryConverter;
 import com.asan.coupon.converter.DistributeTargetConverter;
 import com.asan.coupon.converter.ProductLineConverter;
 import com.asan.coupon.converter.RuleConverter;
+import com.asan.coupon.serialization.CouponTemplateSerialize;
 import com.asan.coupon.vo.TemplateRule;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Convert;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * @author Asan
- * @date 2021/6/12
+ * @date 2021/6/11
  * 优惠券模板实体类定义：基础属性 + 规则属性
  * @EntityListeners 实体监听器，自动添加创建时间等
  * @Convert 属性转换器 用于数据库字段与实体属性之间的转换
@@ -33,79 +32,72 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("coupon_template")
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "coupon_template")
+@JsonSerialize(using = CouponTemplateSerialize.class)
 public class CouponTemplate implements Serializable {
 
     /** 自增主键 */
-    @TableId(type= IdType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     /** 是否是可用状态 */
-    @TableField("available")
-    @NonNull
+    @Column(name = "available", nullable = false)
     private Boolean available;
 
     /** 是否过期 */
-    @TableField("expired")
-    @NonNull
+    @Column(name = "expired", nullable = false)
     private Boolean expired;
 
     /** 优惠券名称 */
-    @TableField("name")
-    @NonNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     /** 优惠券 logo */
-    @TableField("logo")
-    @NonNull
+    @Column(name = "logo", nullable = false)
     private String logo;
 
     /** 优惠券描述 */
-    @TableField("intro")
-    @NonNull
+    @Column(name = "intro", nullable = false)
     private String desc;
 
     /** 优惠券分类 */
-    @TableField("category")
-    @NonNull
+    @Column(name = "category", nullable = false)
     @Convert(converter = CouponCategoryConverter.class)
     private CouponCategory category;
 
     /** 产品线 */
-    @TableField("product_line")
-    @NonNull
+    @Column(name = "product_line", nullable = false)
     @Convert(converter = ProductLineConverter.class)
     private ProductLine productLine;
 
     /** 总数 */
-    @TableField("coupon_count")
-    @NonNull
+    @Column(name = "coupon_count", nullable = false)
     private Integer count;
 
     /** 创建时间 */
-    @TableField("create_time")
-    @NonNull
+    @CreatedDate
+    @Column(name = "create_time", nullable = false)
     private Date createTime;
 
     /** 创建用户 */
-    @TableField("user_id")
-    @NonNull
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
     /** 优惠券模板的编码 */
-    @TableField("template_key")
-    @NonNull
+    @Column(name = "template_key", nullable = false)
     private String key;
 
     /** 目标用户 */
-    @TableField("target")
-    @NonNull
+    @Column(name = "target", nullable = false)
     @Convert(converter = DistributeTargetConverter.class)
     private DistributeTarget target;
 
     /** 优惠券规则 */
-    @TableField("rule")
-    @NonNull
+    @Column(name = "rule", nullable = false)
     @Convert(converter = RuleConverter.class)
     private TemplateRule rule;
 
