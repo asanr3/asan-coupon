@@ -58,7 +58,7 @@ spring:
 
 mybatis:
   #  指定mapper的xml文件路径
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  mapper-locations: classpath:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true

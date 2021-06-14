@@ -1,62 +1,38 @@
 package com.asan.coupon.dao;
 
 import com.asan.coupon.entity.CouponTemplate;
-import com.asan.coupon.mapper.CouponTemplateMapper;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import org.hibernate.mapping.Collection;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 
 /**
  * @author Asan
  * @date 2021/6/12
- * 优惠券模板Dao
+ * CouponTemplate Dao接口定义
+ * JpaRepository<T, ID> T:是实体类的定义（类型）  ID是实体类主键的类型
  */
-
-public class CouponTemplateDao {
-
-    @Autowired
-    private CouponTemplateMapper couponTemplateMapper;
+public interface CouponTemplateDao extends JpaRepository<CouponTemplate, Integer> {
 
     /**
      * 根据模板名称查询模板
      * @param name 优惠券模板名称
-     * @return
+     * @return 优惠券信息
      */
-    CouponTemplate findByName(String name) {
-        List<CouponTemplate> templates = couponTemplateMapper.selectList(
-                new EntityWrapper<CouponTemplate>().eq("name", name));
-
-        return templates.size() > 0 ? templates.get(0) : null;
-    }
+    CouponTemplate findByName(String name);
 
     /**
      * 根据available和expired 标记查找模板记录
-     *  where available =... and expired = ...
+     *    where available =... and expired = ...
      * @param available 是否可用
      * @param expired 是否过期
-     * @return
+     * @return 优惠券模板信息集合
      */
-    List<CouponTemplate> findAllByAvailableAndExpired(Boolean available, Boolean expired) {
-        List<CouponTemplate> templates = couponTemplateMapper.selectList(
-                new EntityWrapper<CouponTemplate>()
-                        .eq("available", available)
-                        .eq("expired", expired));
-
-        return templates;
-    }
+    List<CouponTemplate> findAllByAvailableAndExpired(
+            Boolean available, Boolean expired
+    );
 
     /**
      * 根据expired标记查找模板记录
-     * @param expired 是否过期
-     * @return
-     */
-    List<CouponTemplate> findAllByExpired(Boolean expired) {
-        return couponTemplateMapper.selectList(new EntityWrapper<CouponTemplate>().eq("expired", expired));
-    }
+     * */
+    List<CouponTemplate> findAllByExpired(Boolean expired);
 }
