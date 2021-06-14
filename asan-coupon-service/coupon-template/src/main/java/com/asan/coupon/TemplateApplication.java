@@ -1,6 +1,5 @@
 package com.asan.coupon;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -17,7 +16,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableEurekaClient
 @SpringBootApplication
-@MapperScan("com.asan.coupon.**.mapper")
 public class TemplateApplication {
     public static void main(String[] args) {
         SpringApplication.run(TemplateApplication.class,args);
