@@ -1,6 +1,7 @@
 package com.asan.coupon.entity;
 
 import com.asan.coupon.constant.CouponStatus;
+import com.asan.coupon.converter.CouponStatusConverter;
 import com.asan.coupon.serialization.CouponSerialize;
 import com.asan.coupon.vo.CouponTemplateSDK;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -55,7 +56,7 @@ public class Coupon {
 
     /** 优惠券状态 */
     @Column(name = "status", nullable = false)
-    // @Convert(converter = CouponStatusConverter.class)
+    @Convert(converter = CouponStatusConverter.class)
     private CouponStatus status;
 
     /** 用户优惠券对应的模板信息
