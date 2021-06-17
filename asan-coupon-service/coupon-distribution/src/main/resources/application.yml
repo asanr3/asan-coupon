@@ -1,0 +1,79 @@
+server:
+  port: 7002
+  servlet:
+    context-path: /coupon-distribution
+
+spring:
+  application:
+    name: eureka-client-coupon-distribution
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.show_sql: true
+      hibernate.format_sql: true
+    open-in-view: false
+  datasource:
+    # 数据源
+    url: jdbc:mysql://127.0.0.1:3306/asan_coupon_data?aotuReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接池
+    hikari:
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 8
+      # 最小空闲连接数量
+      minimum-idle: 4
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 30000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 45000
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: AsanCouponHikarri
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    # password:
+    # 连接超时时间
+    timeout: 10000
+  kafka:
+    bootstrap-servers:
+      - 127.0.0.1:9092
+    consumer:
+      group-id: asan-coupon-x
+      auto-offset-reset: latest
+  # 开启 ribbon 重试机制, 即获取服务失败是否从另外一个节点重试
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+
+logging:
+  level:
+    com.asan.coupon: debug
+
+# feign 相关的配置
+feign:
+  hystrix:
+    enabled: true   # Hystrix 默认是关闭的
+  client:
+    config:
+      default:  # 全局的
+        connectTimeout: 2000  # 默认的连接超时时间是 10s
+        readTimeout: 5000
+      eureka-client-coupon-template:  # 单独服务的配置
+        connectTimeout: 3000  # 默认的连接超时时间是 10s
+        readTimeout: 5000
