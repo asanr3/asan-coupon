@@ -57,7 +57,7 @@ public class CouponTemplateController {
     }
 
     /**
-     * <h2>查找所可有用的优惠券模板</>
+     * <h2>查找所有可用的优惠券模板</>
      * 127.0.0.1:7001/coupon-template/template/sdk/all
      * 通过网关访问：127.0.0.1:9000/asan/coupon-template/template/sdk/all
      * */
@@ -68,7 +68,7 @@ public class CouponTemplateController {
     }
 
     /**
-     * <h2>查找所以可用的优惠券模板</>
+     * <h2>查找所有可用的优惠券模板</>
      * 127.0.0.1:7001/coupon-template/template/sdk/infos
      * 通过网关访问：127.0.0.1:9000/asan/coupon-template/template/sdk/infos?ids=1,2
      * */

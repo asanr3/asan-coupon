@@ -23,7 +23,7 @@ public interface ITemplateBaseService {
     CouponTemplate buildTemplateInfo(Integer id) throws CouponException;
 
     /**
-     * 查找所以可用的优惠券模板
+     * 查找所有可用的优惠券模板
      * @return {@link CouponTemplateSDK}S
      * */
     List<CouponTemplateSDK> findAllUsableTemplate();

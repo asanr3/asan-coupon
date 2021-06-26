@@ -50,7 +50,7 @@ public class TemplateBaseServiceImpl implements ITemplateBaseService {
     }
 
     /**
-     * 查找所以可用的优惠券模板
+     * 查找所有可用的优惠券模板
      * @return {@link CouponTemplateSDK}S
      */
     @Override
