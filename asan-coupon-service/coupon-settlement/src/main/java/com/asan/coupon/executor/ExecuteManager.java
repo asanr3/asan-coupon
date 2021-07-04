@@ -94,6 +94,10 @@ public class ExecuteManager implements BeanPostProcessor {
 
     /**
      * <h2>在 bean 初始化之前去执行(before)</h2>
+     * 1、遍历系统初始化过程中的每一个bean
+     * 2、获取到RuleExecutor的bean
+     * 3、然后获取对应的executor和ruleFlag
+     * 4、将executor和ruleFlag装载到executorIndex中
      * */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName)
@@ -115,6 +119,7 @@ public class ExecuteManager implements BeanPostProcessor {
 
         log.info("Load executor {} for rule flag {}.",
                 executor.getClass(), ruleFlag);
+        // 对executorIndex进行初始化，将ruleFlag, executor装载到executorIndex中
         executorIndex.put(ruleFlag, executor);
 
         return null;
