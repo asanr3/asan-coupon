@@ -107,7 +107,7 @@ public class ExecuteManager implements BeanPostProcessor {
         RuleExecutor executor = (RuleExecutor) bean;
         RuleFlag ruleFlag = executor.ruleConfig();
 
-        // 如果executorIndex中包含了当前的ruleFlag就代表这个executor被注册过来，抛出重复注册异常
+        // 如果executorIndex中包含了当前的ruleFlag就代表这个executor被注册过了，抛出重复注册异常
         if (executorIndex.containsKey(ruleFlag)) {
             throw new IllegalStateException("There is already an executor" +
                     "for rule flag: " + ruleFlag);
