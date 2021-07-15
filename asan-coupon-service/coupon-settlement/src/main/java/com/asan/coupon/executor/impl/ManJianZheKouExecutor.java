@@ -154,12 +154,13 @@ public class ManJianZheKouExecutor extends AbstractExecutor
     @SuppressWarnings("all")
     private boolean isTemplateCanShared(SettlementInfo.CouponAndTemplateInfo manJian,
                         SettlementInfo.CouponAndTemplateInfo zheKou) {
-
+        // 将优惠券中（不完整）的优惠券码和id拼接，组成一个完整的优惠券码
         String manjianKey = manJian.getTemplate().getKey()
                 + String.format("%04d", manJian.getTemplate().getId());
         String zhekouKey = zheKou.getTemplate().getKey()
                 + String.format("%04d", zheKou.getTemplate().getId());
 
+        // 将拼接完成的优惠券码和入参中优惠券模板里面的权重里面的优惠券码保存起来
         List<String> allSharedKeysForManjian = new ArrayList<>();
         allSharedKeysForManjian.add(manjianKey);
         allSharedKeysForManjian.addAll(JSON.parseObject(
@@ -174,6 +175,7 @@ public class ManJianZheKouExecutor extends AbstractExecutor
                 List.class
         ));
 
+        // 如果拼接的优惠券码属于保存起来的list的子集，则认为这两种优惠券可以共用
         return CollectionUtils.isSubCollection(
                 Arrays.asList(manjianKey, zhekouKey), allSharedKeysForManjian)
                 || CollectionUtils.isSubCollection(
