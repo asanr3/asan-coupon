@@ -3,6 +3,7 @@ package com.asan.coupon;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author Asan
@@ -12,6 +13,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * @SpringCloudApplication 组合了 springboot应用注解 + 服务发现注解 + 熔断注解
  */
 @EnableZuulProxy
+@EnableFeignClients     // 一定需要加入, 因为 permission-sdk 中写了 Feign 接口
 @SpringCloudApplication
 public class ZuulGatewayApplication {
 
